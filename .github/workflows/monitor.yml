@@ -19,8 +19,8 @@ jobs:
       - run: pip install requests
       - run: python check.py
         env:
-          TWELVE_DATA_KEY: ${{ 774564e850394175bb5f71a050d5158b }}
-          NTFY_TOPIC: ${{ gbpusdalertx7k2p9 }}
+          TWELVE_DATA_KEY: ${{ secrets.TWELVE_DATA_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           THRESHOLD_PIPS: '19.5'
       - run: |
           git config user.name "gbpusd-bot"
