@@ -21,7 +21,7 @@ jobs:
         env:
           TWELVE_DATA_KEY: ${{ secrets.TWELVE_DATA_KEY }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-          THRESHOLD_PIPS: '1.5'
+          THRESHOLD_PIPS: '19.5'
       - run: |
           git config user.name "gbpusd-bot"
           git config user.email "bot@users.noreply.github.com"
