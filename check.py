@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 
 API_KEY = os.environ["TWELVE_DATA_KEY"]
 NTFY_TOPIC = os.environ["NTFY_TOPIC"]
-THRESHOLD = float(os.environ.get("THRESHOLD_PIPS", "19.5"))
+THRESHOLD = float(os.environ.get("THRESHOLD_PIPS", "0.5"))
 PIP = 0.0001
 STATE_FILE = pathlib.Path("state.json")
 
