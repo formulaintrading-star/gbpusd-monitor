@@ -1,4 +1,5 @@
 import os, json, requests, pathlib
+from datetime import datetime, timedelta
 
 API_KEY = os.environ["TWELVE_DATA_KEY"]
 NTFY_TOPIC = os.environ["NTFY_TOPIC"]
@@ -41,11 +42,14 @@ def main():
         range_pips = (high - low) / PIP
         t = bar["datetime"]
         if range_pips >= THRESHOLD and t not in alerted:
-            msg = f"GBP/USD 15m bar range hit {range_pips:.1f} pips (threshold {THRESHOLD}) at {t} UTC"
+            utc_dt = datetime.strptime(t, "%Y-%m-%d %H:%M:%S")
+            local_dt = utc_dt + timedelta(hours=3)
+            local_str = local_dt.strftime("%Y-%m-%d %H:%M")
+            msg = f"GBP/USD 15m range: {range_pips:.1f} pips (threshold {THRESHOLD}) — bar closed {local_str}"
             requests.post(
                 f"https://ntfy.sh/{NTFY_TOPIC}",
                 data=msg.encode("utf-8"),
-                headers={"Title": "GBP/USD range alert", "Priority": "high", "Tags": "warning"},
+                headers={"Title": "Range notification", "Priority": "high", "Tags": "warning"},
                 timeout=10,
             )
             alerted.add(t)
