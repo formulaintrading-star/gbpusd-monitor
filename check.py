@@ -45,7 +45,7 @@ def main():
             utc_dt = datetime.strptime(t, "%Y-%m-%d %H:%M:%S")
             local_dt = utc_dt + timedelta(hours=3)
             local_str = local_dt.strftime("%Y-%m-%d %H:%M")
-            msg = f"GBP/USD 15m range: {range_pips:.1f} pips (threshold {THRESHOLD}) — bar closed {local_str}"
+            msg = f"15m range: {range_pips:.1f} pips (threshold {THRESHOLD}) — bar closed {local_str}"
             requests.post(
                 f"https://ntfy.sh/{NTFY_TOPIC}",
                 data=msg.encode("utf-8"),
